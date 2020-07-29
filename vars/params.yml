@@ -1,0 +1,41 @@
+---
+
+avi_healthmonitor:
+  - name: &hm0 ansible-hm1
+    receive_timeout: 1
+    failed_checks: 2
+    send_interval: 1
+    successful_checks: 2
+    type: HEALTH_MONITOR_HTTP
+    http_request: "HEAD / HTTP/1.0"
+    http_response_code:
+      - HTTP_2XX
+      - HTTP_3XX
+      - HTTP_5XX
+
+avi_pool:
+  - name: &pool0 ansible-pool1
+    lb_algorithm: LB_ALGORITHM_ROUND_ROBIN
+    health_monitor_refs: *hm0
+    servers:
+      - ip:
+          addr: 172.16.3.253
+          type: 'V4'
+      - ip:
+          addr: 172.16.3.254
+          type: 'V4'
+
+virtualservice:
+  http:
+    - name: ansible-app1
+      services:
+        - port: 80
+          enable_ssl: false
+        - port: 443
+          enable_ssl: true
+      pool_ref: *pool0
+      enable_rhi: false
+      network_ref: "{{ networkName }}"
+      mask: "{{ networkMask }}"
+      type: "{{ networkType }}"
+      addr: "{{ networkAddress }}"
