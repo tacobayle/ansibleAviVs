@@ -69,7 +69,7 @@ avi_pool:
 ## Use the the ansible playbook to:
 1. Create a Health Monitor
 2. Create a Pool
-3. Create a VS based on Avi IPAM and DNS
+3. Create a VS based on Avi IPAM (first network configured) and DNS (first domain configured)
 
 ## Run the playbook:
 ```
