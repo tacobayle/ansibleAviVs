@@ -36,6 +36,7 @@ Avi 18.2.9
 ### Avi Environment
 
 - LSC Cloud
+- VMware Cloud (Vsphere 6.7.0.42000) without NSX
 
 
 ## Input/Parameters:
@@ -48,7 +49,10 @@ avi@ansible:~/ansible/aviVs$ more vars/creds.json
 avi@ansible:~/ansible/aviVs$
 ```
 
-2. All the other paramaters/variables are stored in vars/params.yml - the following needs to be updated
+2. All the other paramaters/variables are stored in variables.tf.
+The following parameters need to be changed:
+The below variable(s) called need(s) to be adjusted:
+- avi_pool
 
 ```
 #
@@ -68,8 +72,8 @@ avi_pool:
 
 ## Use the the ansible playbook to:
 1. Create a Health Monitor
-2. Create a Pool
-3. Create a VS based on Avi IPAM (first network configured) and DNS (first domain configured)
+2. Create a Pool (based on the Health Monitor previously created)
+3. Create a VS based on Avi IPAM and DNS and based on the pool previously created
 
 ## Run the playbook:
 ```
@@ -77,3 +81,5 @@ python3 aviVs.py creds.json
 ```
 
 ## Improvment:
+- add SE service group
+- add log and analytics capabilities
