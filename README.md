@@ -54,6 +54,8 @@ The following parameters need to be changed:
 The below variable(s) called need(s) to be adjusted:
 - avi_pool
 
+The other varaiables don't need to be adjusted.
+
 ```
 #
 # Pool: ip of the servers
