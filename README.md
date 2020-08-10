@@ -83,5 +83,6 @@ python3 aviVs.py creds.json
 ```
 
 ## Improvment:
-- add SE service group
-- add log and analytics capabilities
+- add SE service group (to be tested)
+- add log and analytics capabilities (to be tested)
+- vsvip (to be tested) against 20.1.1
