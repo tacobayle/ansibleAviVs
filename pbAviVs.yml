@@ -73,21 +73,21 @@
       tags:
         - ipamdns
 
-    # - name: Debug
-    #   debug:
-    #     msg: "{{ networkName }}"
-    #
-    # - name: Debug
-    #   debug:
-    #     msg: "{{ networkMask }}"
-    #
-    # - name: Debug
-    #   debug:
-    #     msg: "{{ networkAddress }}"
-    #
-    # - name: Debug
-    #   debug:
-    #     msg: "{{ networkType }}"
+    - name: Debug
+      debug:
+        msg: "{{ networkName }}"
+
+    - name: Debug
+      debug:
+        msg: "{{ networkMask }}"
+
+    - name: Debug
+      debug:
+        msg: "{{ networkAddress }}"
+
+    - name: Debug
+      debug:
+        msg: "{{ networkType }}"
 
     - name: Create HTTP health monitor
       avi_healthmonitor:
