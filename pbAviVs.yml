@@ -167,7 +167,7 @@
         vip:
           - auto_allocate_ip: true
             ipam_network_subnet:
-              #network_ref: "/api/network/?name={{ item.network_ref | default(networkName) }}"
+              network_ref: "/api/network/?name={{ item.network_ref | default(networkName) }}"
               subnet:
                 mask: "{{ item.mask | default(networkMask) }}"
                 ip_addr:
