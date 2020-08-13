@@ -56,7 +56,11 @@ avi@ansible:~/ansible/aviVs$
 avi_servers_ips:
   - 172.16.3.253
   - 172.16.3.254
+
+avi_cloud:
+  name: Default-Cloud
 ```
+
 - The other varaiables don't need to be adjusted.
 
 
