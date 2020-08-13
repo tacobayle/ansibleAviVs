@@ -6,7 +6,7 @@ Configure a Health Monitor, Pool and VS through Ansible
 ## Prerequisites:
 1. Make sure pip install avisdk is installed:
 ```
-pip install avisdk
+pip install avisdk==18.2.9
 sudo -u ubuntu ansible-galaxy install -f avinetworks.avisdk
 ```
 3. Make sure your Avi Controller is reachable from your ansible host
@@ -30,7 +30,8 @@ avi@ansible:~/ansible/aviLscCloud$
 ### Avi version
 
 ```
-Avi 18.2.9
+Avi 20.1.1
+avisdk 18.2.9
 ```
 
 ### Avi Environment
@@ -49,40 +50,28 @@ avi@ansible:~/ansible/aviVs$ more vars/creds.json
 avi@ansible:~/ansible/aviVs$
 ```
 
-2. All the other paramaters/variables are stored in variables.tf.
-The following parameters need to be changed:
-The below variable(s) called need(s) to be adjusted:
-- avi_pool
-
-The other varaiables don't need to be adjusted.
-
+2. All the other paramaters/variables are stored in vars/params.yml
+- The following parameters need to be changed:
 ```
-#
-# Pool: ip of the servers
-avi_pool:
-  - name: &pool0 ansible-pool1
-    lb_algorithm: LB_ALGORITHM_ROUND_ROBIN
-    health_monitor_refs: *hm0
-    servers:
-      - ip:
-          addr: 172.16.3.253
-          type: 'V4'
-      - ip:
-          addr: 172.16.3.254
-          type: 'V4'
+avi_servers_ips:
+  - 172.16.3.253
+  - 172.16.3.254
 ```
+- The other varaiables don't need to be adjusted.
+
+
 
 ## Use the the ansible playbook to:
 1. Create a Health Monitor
 2. Create a Pool (based on the Health Monitor previously created)
-3. Create a VS based on Avi IPAM and DNS and based on the pool previously created
+3. Create a VS based on Avi IPAM (first network) and DNS (first domain name) and based on the pool previously created
 
 ## Run the playbook:
 ```
-python3 aviVs.py creds.json
+ansible-playbook pbAviVs.yml
 ```
 
 ## Improvment:
 - add SE service group (to be tested)
 - add log and analytics capabilities (to be tested)
-- vsvip (to be tested) against 20.1.1
+- vsvip against 20.1.1 (to be tested)

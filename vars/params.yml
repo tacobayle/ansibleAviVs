@@ -1,9 +1,10 @@
 ---
 
-avi_servers:
+avi_servers_ips:
   - 172.16.3.253
   - 172.16.3.254
 
+avi_servers_port: 80
 
 avi_cloud:
   name: Default-Cloud
@@ -46,10 +47,3 @@ avi_virtualservice:
       pool_ref: *pool0
       enable_rhi: false
       se_group_ref: Default-Group
-
-avi_vsvip:
-  - name: *vs0
-    network_ref: "{{ networkName }}"
-    mask: "{{ networkMask }}"
-    type: "{{ networkType }}"
-    addr: "{{ networkAddress }}"
