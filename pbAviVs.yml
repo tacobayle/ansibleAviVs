@@ -24,12 +24,17 @@
       register: ipamDnsOutput
       tags:
         - ipamdns
+      when:
+        - state is not defined
+
 
     - name: Retrieve domainName
       set_fact:
         domainName: "{{ item.internal_profile.dns_service_domain.0.domain_name }}"
       loop: "{{ ipamDnsOutput.obj.results }}"
-      when: item.type == "IPAMDNS_TYPE_INTERNAL_DNS"
+      when:
+        - state is not defined
+        - item.type == "IPAMDNS_TYPE_INTERNAL_DNS"
       tags:
         - ipamdns
 
@@ -43,8 +48,9 @@
       set_fact:
         networkUuid: "{{ item.internal_profile.usable_network_refs.0.split('/network/')[1] }}"
       loop: "{{ ipamDnsOutput.obj.results }}"
-      when: item.type == "IPAMDNS_TYPE_INTERNAL"
-
+      when:
+        - state is not defined
+        - item.type == "IPAMDNS_TYPE_INTERNAL"
     # - name: Debug
     #   debug:
     #     msg: "{{ networkUuid }}"
@@ -61,6 +67,9 @@
       register: networkOutput
       tags:
         - ipamdns
+      when:
+        - state is not defined
+
 
     - name: Retrieve Network details
       set_fact:
@@ -69,25 +78,35 @@
         networkAddress: "{{ item.configured_subnets.0.prefix.ip_addr.addr }}"
         networkType: "{{ item.configured_subnets.0.prefix.ip_addr.type }}"
       loop: "{{ networkOutput.obj.results }}"
-      when: item.uuid == networkUuid
+      when:
+        - state is not defined
+        - item.uuid == networkUuid
       tags:
         - ipamdns
 
     - name: Debug
       debug:
         msg: "{{ networkName }}"
+      when:
+        - state is not defined
 
     - name: Debug
       debug:
         msg: "{{ networkMask }}"
+      when:
+        - state is not defined
 
     - name: Debug
       debug:
         msg: "{{ networkAddress }}"
+      when:
+        - state is not defined
 
     - name: Debug
       debug:
         msg: "{{ networkType }}"
+      when:
+        - state is not defined
 
     - name: Create HTTP health monitor
       avi_healthmonitor:
@@ -106,6 +125,7 @@
         type: "{{ item.type }}"
       loop: "{{ avi_healthmonitor }}"
       when:
+        - state is not defined
         - item.type == "HEALTH_MONITOR_HTTP"
         - avi_healthmonitor is defined
       tags:
@@ -125,6 +145,7 @@
         #  - "/api/healthmonitor?name={{ avi_pool.health_monitor_refs }}"
         #servers: "{{ item.servers }}"
       when:
+        - state is not defined
         - avi_pool is defined
       tags:
         - pool
@@ -149,6 +170,7 @@
               type: 'V4'
       loop: "{{ avi_servers_ips }}"
       when:
+        - state is not defined
         - avi_servers_ips is defined
         - avi_pool is defined
       tags:
@@ -176,6 +198,7 @@
       register: OutputVsVip
       loop: "{{ avi_virtualservice.http }}"
       when:
+        - state is not defined
         - avi_virtualservice.http is defined
       tags:
         - vsvip
@@ -203,6 +226,7 @@
         enable_rhi: "{{ item.enable_rhi | default('false') }}"
         vsvip_ref: "/api/vsvip/?name=vsvip-{{ item.name }}"
         se_group_ref:  "/api/serviceenginegroup/?name={{ item.se_group_ref | default('Default-Group') }}"
+        state: "{{ state | default(omit) }}"
         analytics_policy:
           udf_log_throttle: 10
           full_client_logs:
