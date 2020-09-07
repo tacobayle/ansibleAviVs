@@ -71,6 +71,11 @@ avi_cloud:
 3. Create a VS based on Avi IPAM (first network) and DNS (first domain name) and based on the pool previously created
 
 ## Run the playbook:
+- download the playbook:
+```
+git clone https://github.com/tacobayle/ansibleAviVs
+```
+- initialize the variables (vars/creds.json and vars/params.yml)
 - to create the VS:
 ```
 ansible-playbook pbAviVs.yml
