@@ -210,7 +210,7 @@
     #   tags:
     #     - debug
 
-    - name: Create HTTP Virtualservice (based on Dynamic IP - Ipam and DNS)
+    - name: Create or Delete HTTP Virtualservice (based on Dynamic IP - Ipam and DNS)
       avi_virtualservice:
         avi_credentials: "{{ avi_credentials }}"
         api_version: "{{ avi_credentials.api_version }}"
