@@ -1,4 +1,4 @@
-# python Avi VS
+# ansibleAviVs
 
 ## Goals
 Configure a Health Monitor, Pool and VS through Ansible
@@ -78,11 +78,11 @@ git clone https://github.com/tacobayle/ansibleAviVs
 - initialize the variables (vars/creds.json and vars/params.yml)
 - to create the VS:
 ```
-ansible-playbook pbAviVs.yml
+ansible-playbook local.yml --extra-vars @pathto/creds.json
 ```
 - to remove the VS:
 ```
-ansible-playbook pbAviVs.yml --extra-var state=absent
+ansible-playbook local.yml --extra-vars @pathto/creds.json --extra-var state=absent
 ```
 
 ## Improvment:
