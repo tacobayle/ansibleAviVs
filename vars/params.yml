@@ -1,13 +1,13 @@
 ---
 
 avi_servers_ips:
-  - 172.16.3.253
-  - 172.16.3.254
+  - 100.64.129.60
+  - 100.64.129.34
 
 avi_servers_port: 80
 
 avi_cloud:
-  name: Default-Cloud
+  name: cloudVmw
 
 tenant_ref: admin
 
