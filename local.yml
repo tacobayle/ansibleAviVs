@@ -32,6 +32,8 @@
       set_fact:
         domainName: "{{ item.internal_profile.dns_service_domain.0.domain_name }}"
       loop: "{{ ipamDnsOutput.obj.results }}"
+      loop_control:
+        label: "{{ item.name }}"
       when:
         - state is not defined
         - item.type == "IPAMDNS_TYPE_INTERNAL_DNS"
@@ -48,6 +50,8 @@
       set_fact:
         networkUuid: "{{ item.internal_profile.usable_network_refs.0.split('/network/')[1] }}"
       loop: "{{ ipamDnsOutput.obj.results }}"
+      loop_control:
+        label: "{{ item.name }}"
       when:
         - state is not defined
         - item.type == "IPAMDNS_TYPE_INTERNAL"
@@ -78,6 +82,8 @@
         networkAddress: "{{ item.configured_subnets.0.prefix.ip_addr.addr }}"
         networkType: "{{ item.configured_subnets.0.prefix.ip_addr.type }}"
       loop: "{{ networkOutput.obj.results }}"
+      loop_control:
+        label: "{{ item.name }}"
       when:
         - state is not defined
         - item.uuid == networkUuid

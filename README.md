@@ -88,4 +88,5 @@ ansible-playbook local.yml --extra-vars @pathto/creds.json --extra-var state=abs
 ## Improvment:
 - add SE service group (to be tested)
 - add log and analytics capabilities (to be tested)
-- vsvip against 20.1.1 (to be tested)
+- remove all the objects when state is absent
+- use avi lookup module to retrieve network uuid
